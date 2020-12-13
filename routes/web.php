@@ -27,4 +27,33 @@ Route::get('/insert', function(){
 
 });
 
+Route::get('/read', function(){
+    $user = User::findORFail(2);
+    foreach($user->roles as $role){
+        return $role->name;
+    }
+});
+
+Route::get('/update', function(){
+    $user = User::findOrFail(1);
+
+    if($user->has('roles')){
+        foreach($user->roles as $role){
+            if($role->name = 'admin'){
+                $role->name = 'administrator';
+                $role->save();
+            }
+        }
+    }
+
+    // $user->roles()->whereId(1)->update(['name'=>'sub']);
+});
+
+Route::get('/delete', function(){
+    $user = User::findOrFail(1);
+    foreach($user->roles as $role){
+        $role->whereId(1)->delete();
+    }
+});
+
 
