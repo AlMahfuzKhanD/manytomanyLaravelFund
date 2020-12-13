@@ -35,11 +35,11 @@ Route::get('/read', function(){
 });
 
 Route::get('/update', function(){
-    $user = User::findOrFail(1);
+    $user = User::findOrFail(2);
 
     if($user->has('roles')){
         foreach($user->roles as $role){
-            if($role->name = 'admin'){
+            if($role->name = 'subs'){
                 $role->name = 'administrator';
                 $role->save();
             }
@@ -54,6 +54,22 @@ Route::get('/delete', function(){
     foreach($user->roles as $role){
         $role->whereId(1)->delete();
     }
+});
+
+Route::get('/attach', function(){
+    $user = User::findOrFail(1);
+    $user->roles()->attach(2);
+});
+
+
+Route::get('/detach', function(){
+    $user = User::findOrFail(1);
+    $user->roles()->detach(2);
+});
+
+Route::get('/sync', function(){
+    $user = User::findOrFail(1);
+    $user->roles()->sync([2]);
 });
 
 
