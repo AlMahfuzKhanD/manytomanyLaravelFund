@@ -62,10 +62,10 @@ Route::get('/', function () {
 // });
 
 
-// Route::get('/detach', function(){
-//     $user = User::findOrFail(1);
-//     $user->roles()->detach(2);
-// });
+Route::get('/detach', function(){
+    $user = User::findOrFail(1);
+    $user->roles()->detach(2);
+});
 
 // Route::get('/sync', function(){
 //     $user = User::findOrFail(1);
@@ -95,6 +95,19 @@ Route::get('/update', function(){
             }
         }
     }
+});
+
+Route::get('/delete', function(){
+    $user = User::findOrFail(1);
+    foreach($user->roles as $role){
+        $role->whereId(4)->delete();
+    }
+});
+
+
+Route::get('/attach', function(){
+    $user = User::findOrFail(1);
+    $user->roles()->attach(2);
 });
 
 
